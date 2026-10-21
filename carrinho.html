@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheeler, Rawson & Co. - Catálogo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&display=swap');
+
+        body { 
+            background-color: #eaddcf; color: #3e2723; font-family: 'Special Elite', monospace; 
+            margin: 0; padding: 20px; background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+        }
+        header { text-align: center; border-bottom: 4px double #3e2723; padding-bottom: 15px; margin-bottom: 20px; }
+        h1 { font-family: 'Rye', cursive; font-size: 3.5rem; text-transform: uppercase; letter-spacing: 3px; margin: 0; }
+        .subtitle { font-style: italic; color: #5d4037; font-size: 1.2rem; margin-bottom: 20px; }
+        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; border-bottom: 1px solid #3e2723; padding-bottom: 20px; }
+        
+        .nav-btn { background-color: #3e2723; color: #eaddcf; border: 2px solid #3e2723; padding: 10px 15px; font-family: 'Rye', cursive; font-size: 1rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-btn:hover { background-color: #5d4037; }
+        
+        .section-title { font-family: 'Rye', cursive; text-align: center; font-size: 2.2rem; text-transform: uppercase; border-bottom: 2px dashed #3e2723; padding-bottom: 10px; margin: 40px auto 20px auto; max-width: 1100px; }
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; }
+        
+        .product-card { border: 2px solid #3e2723; padding: 20px; background-color: #f5eedc; text-align: center; box-shadow: 2px 2px 0px #3e2723; position: relative; display: flex; flex-direction: column; }
+        .product-card p { flex-grow: 1; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.4; }
+        .badge { position: absolute; top: -15px; right: -15px; background-color: #8b0000; color: #f5eedc; padding: 10px; font-family: 'Rye', cursive; font-size: 1.1rem; border: 2px solid #3e2723; transform: rotate(10deg); z-index: 10; }
+        .product-img { height: 180px; border: 1px solid #3e2723; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; background-color: #eaddcf; font-style: italic; color: #8d6e63; }
+        .price { font-family: 'Rye', cursive; font-size: 2rem; margin: 0 0 15px 0; }
+        
+        .action-btns { display: flex; gap: 10px; margin-top: auto; }
+        .buy-btn { background-color: transparent; color: #3e2723; border: 2px solid #3e2723; padding: 10px; width: 100%; font-family: 'Rye', cursive; font-size: 1.1rem; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .buy-btn:hover { background-color: #3e2723; color: #eaddcf; }
+        .buy-btn.added { background-color: #27ae60; color: white; border-color: #27ae60; }
+        
+        .fav-btn { background-color: transparent; border: 2px solid #3e2723; color: #3e2723; padding: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; transition: 0.3s; }
+        .fav-btn:hover, .fav-btn.active { background-color: #3e2723; color: #eaddcf; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Wheeler, Rawson & Co.</h1>
+    <div class="subtitle">Fornecedores de Armas, Roupas e Provisões para o Velho Oeste</div>
+    
+    <nav>
+        <button class="nav-btn" onclick="window.location.href='index.html'">Início</button>
+        <button class="nav-btn" onclick="window.location.href='carrinho.html'">Carrinho de Compras: <span id="cart-count">0</span></button>
+        <button class="nav-btn" onclick="window.location.href='login.html'">Identificar-se</button>
+    </nav>
+</header>
+
+<h2 class="section-title">Destaques</h2>
+<div class="container">
+    <div class="product-card">
+        <div class="badge">Esgotando!</div>
+        <div class="product-img">[ Ilustração de Revólver ]</div>
+        <h2>Revólver de Ação Dupla</h2>
+        <p>Confiável, rápido e letal. A melhor engenharia para a sua proteção nas fronteiras implacáveis.</p>
+        <div class="price">$ 65.00</div>
+        <div class="action-btns">
+            <button class="buy-btn" onclick="adicionar(this)">Encomendar</button>
+            <button class="fav-btn" onclick="favoritar(this)">★</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-img">[ Ilustração de Tônico ]</div>
+        <h2>Tônico Milagroso</h2>
+        <p>Restaura a saúde, a energia e a concentração num piscar de olhos. Receita rigorosamente patenteada!</p>
+        <div class="price">$ 3.50</div>
+        <div class="action-btns">
+            <button class="buy-btn" onclick="adicionar(this)">Encomendar</button>
+            <button class="fav-btn" onclick="favoritar(this)">★</button>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-img">[ Ilustração de Pomada ]</div>
+        <h2>Pomada para Cavalo</h2>
+        <p>Alivia o cansaço e melhora a pelagem do seu fiel companheiro após longas viagens.</p>
+        <div class="price">$ 1.75</div>
+        <div class="action-btns">
+            <button class="buy-btn" onclick="adicionar(this)">Encomendar</button>
+            <button class="fav-btn" onclick="favoritar(this)">★</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let carrinho = 0;
+    
+    function adicionar(botao) {
+        carrinho++;
+        document.getElementById('cart-count').innerText = carrinho;
+        botao.innerText = "Adicionado!";
+        botao.classList.add("added");
+        setTimeout(() => {
+            botao.innerText = "Encomendar";
+            botao.classList.remove("added");
+        }, 2000);
+    }
+
+    function favoritar(botao) {
+        botao.classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>

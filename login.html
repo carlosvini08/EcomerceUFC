@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identificação - Wheeler, Rawson & Co.</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&display=swap');
+
+        body { 
+            background-color: #eaddcf; color: #3e2723; font-family: 'Special Elite', monospace; 
+            margin: 0; padding: 20px; background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 90vh;
+        }
+        h1 { font-family: 'Rye', cursive; font-size: 3rem; margin-bottom: 10px; text-align: center;}
+        
+        .login-box { border: 2px solid #3e2723; padding: 40px; background-color: #f5eedc; box-shadow: 6px 6px 0px #3e2723; width: 100%; max-width: 400px; text-align: center; }
+        .login-box h2 { font-family: 'Rye', cursive; margin-top: 0; border-bottom: 1px dashed #3e2723; padding-bottom: 10px; }
+        
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 5px; font-family: 'Rye', cursive; }
+        .input-group input { width: 90%; padding: 10px; border: 1px solid #3e2723; background-color: #eaddcf; font-family: 'Special Elite', monospace; font-size: 1.1rem; }
+        
+        .login-btn { background-color: #3e2723; color: #eaddcf; border: none; padding: 15px; width: 100%; font-family: 'Rye', cursive; font-size: 1.2rem; cursor: pointer; margin-top: 10px; }
+        .back-link { display: inline-block; margin-top: 20px; color: #8b0000; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>Wheeler, Rawson & Co.</h1>
+
+<div class="login-box">
+    <h2>Identificação</h2>
+    <div class="input-group">
+        <label>Código Telegráfico (E-mail)</label>
+        <input type="email" placeholder="cidadao@fronteira.com">
+    </div>
+    <div class="input-group">
+        <label>Senha de Acesso</label>
+        <input type="password" placeholder="••••••••">
+    </div>
+    <button class="login-btn" onclick="window.location.href='index.html'">Entrar no Sistema</button>
+    <a href="index.html" class="back-link">← Retornar ao Catálogo</a>
+</div>
+
+</body>
+</html>

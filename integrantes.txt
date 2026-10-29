@@ -1,0 +1,10 @@
+Programação para Web I - Trabalho Final
+Projeto: Wheeler, Rawson & Co. - E-commerce inspirado no catálogo de Red Dead Redemption
+
+Integrantes da equipe:
+
+Matrícula   Nome
+---------   ------------------------------------------
+567939      Arthur Heráclio
+566298      Renan Araújo
+XXXXXX      Carlos Vinícius

@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "senhaBanco",
+            "type": "promptString",
+            "description": "Senha do usuário postgres do seu PostgreSQL local",
+            "password": true
+        }
+    ],
+    "tasks": [
+        {
+            "label": "Rodar servidor (Jetty)",
+            "type": "shell",
+            "command": "./mvnw.cmd jetty:run",
+            "options": {
+                "env": {
+                    "DB_SENHA": "${input:senhaBanco}"
+                }
+            },
+            "isBackground": true,
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Gerar .war",
+            "type": "shell",
+            "command": "./mvnw.cmd clean package",
+            "problemMatcher": []
+        }
+    ]
+}

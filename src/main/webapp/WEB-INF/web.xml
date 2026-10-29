@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <display-name>Wheeler, Rawson &amp; Co.</display-name>
+
+    <request-character-encoding>UTF-8</request-character-encoding>
+    <response-character-encoding>UTF-8</response-character-encoding>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <!-- Filtros de segurança -->
+    <filter>
+        <filter-name>SegurancaFilter</filter-name>
+        <filter-class>filtro.SegurancaFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdministradorFilter</filter-name>
+        <filter-class>filtro.AdministradorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SegurancaFilter</filter-name>
+        <url-pattern>/secure/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdministradorFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Acesso -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controle.acesso.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controle.acesso.LogoutServlet</servlet-class>
+    </servlet>
+
+    <!-- Usuário -->
+    <servlet>
+        <servlet-name>InserirClienteServlet</servlet-name>
+        <servlet-class>controle.usuario.InserirClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsuarioFormServlet</servlet-name>
+        <servlet-class>controle.usuario.UsuarioFormServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarUsuarioServlet</servlet-name>
+        <servlet-class>controle.usuario.AtualizarUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoverUsuarioServlet</servlet-name>
+        <servlet-class>controle.usuario.RemoverUsuarioServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InserirClienteServlet</servlet-name>
+        <url-pattern>/InserirCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioFormServlet</servlet-name>
+        <url-pattern>/secure/UsuarioForm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarUsuarioServlet</servlet-name>
+        <url-pattern>/secure/AtualizarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoverUsuarioServlet</servlet-name>
+        <url-pattern>/secure/RemoverUsuario</url-pattern>
+    </servlet-mapping>
+</web-app>

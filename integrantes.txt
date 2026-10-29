@@ -7,4 +7,4 @@ Matrícula   Nome
 ---------   ------------------------------------------
 567939      Arthur Heráclio
 566298      Renan Araújo
-XXXXXX      Carlos Vinícius
+579961      Carlos Vinícius

@@ -4,10 +4,17 @@
 --   psql -U postgres -f sql/banco.sql
 -- =====================================================================
 
+-- Força o psql a ler este arquivo como UTF-8. Sem isto, no Windows o psql usa
+-- o codepage do terminal (Windows-1252) e os acentos são gravados quebrados.
+\encoding UTF8
+
 DROP DATABASE IF EXISTS wheelerrawson;
 CREATE DATABASE wheelerrawson ENCODING 'UTF8';
 
 \c wheelerrawson
+
+-- a conexão foi refeita pelo \c: garante UTF-8 de novo
+\encoding UTF8
 
 CREATE TABLE usuario (
     id            SERIAL       PRIMARY KEY,

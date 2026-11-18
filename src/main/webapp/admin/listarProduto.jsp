@@ -1,31 +1,32 @@
 <%@page import="java.util.List"%>
 <%@page import="modelo.produto.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="../cabecalho.jsp" />
+<% String titulo = "Gerenciar Produtos"; %>
+<%@include file="../cabecalho.jsp" %>
 
-<div class="container" style="flex-direction: column; align-items: center;">
-    <h2 class="section-title">Gerenciar Estoque e Produtos</h2>
+<div class="form-box largo">
+    <div class="selo">Gabinete do Xerife</div>
+    <h2>Gerenciar Estoque e Produtos</h2>
 
-    <% String mensagem = (String) request.getAttribute("mensagem");
-       if (mensagem != null) { %>
-        <p style="font-weight: bold; color: #3e2723;"><%= mensagem %></p>
+    <% String msgAdmin = (String) request.getAttribute("mensagem");
+       if (msgAdmin != null) { %>
+        <p class="dica" style="font-weight: bold; color: #3e2723;"><%= msgAdmin %></p>
     <% } %>
 
-    <div style="margin-bottom: 20px;">
-        <a href="<%= request.getContextPath() %>/admin/ProdutoForm" class="buy-btn" style="text-decoration: none; padding: 10px 20px;">+ Novo Produto</a>
-        <a href="<%= request.getContextPath() %>/secure/principal.jsp" class="buy-btn" style="text-decoration: none; padding: 10px 20px;">Voltar ao Painel</a>
+    <div class="acoes" style="margin-bottom: 25px;">
+        <a class="nav-btn" href="<%= contexto %>/admin/ProdutoForm">+ Novo Produto</a>
+        <a class="nav-btn" href="<%= contexto %>/secure/principal.jsp">Voltar ao Gabinete</a>
     </div>
 
-    <table border="1" cellpadding="10" style="width: 90%; border-collapse: collapse; background: #f5eedc;">
+    <table class="ficha">
         <thead>
-            <tr style="background: #3e2723; color: #eaddcf;">
+            <tr>
                 <th>ID</th>
                 <th>Foto</th>
                 <th>Descrição</th>
-                <th>Detalhes</th>
                 <th>Preço</th>
                 <th>Estoque</th>
-                <th>Ações</th>
+                <th style="text-align: center;">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -36,28 +37,30 @@
                     <td><%= p.getId() %></td>
                     <td style="text-align: center;">
                         <% if (p.getFoto() != null && !p.getFoto().isEmpty()) { %>
-                            <img src="<%= request.getContextPath() %>/MostrarFotoProduto?foto=<%= p.getFoto() %>" alt="Foto" style="max-height: 50px;" />
+                            <img src="<%= contexto %>/MostrarFotoProduto?foto=<%= p.getFoto() %>" alt="Foto" style="max-height: 45px;" />
                         <% } else { %>
-                            Sem foto
+                            -
                         <% } %>
                     </td>
-                    <td><%= p.getDescricao() %></td>
-                    <td><%= (p.getDetalhes() != null) ? p.getDetalhes() : "" %></td>
+                    <td>
+                        <strong><%= p.getDescricao() %></strong><br/>
+                        <small><%= (p.getDetalhes() != null) ? p.getDetalhes() : "" %></small>
+                    </td>
                     <td>R$ <%= String.format("%.2f", p.getPreco()) %></td>
                     <td><%= p.getQuantidade() %> un.</td>
                     <td style="text-align: center;">
-                        <a href="<%= request.getContextPath() %>/admin/ListarProdutoForm?id=<%= p.getId() %>">Alterar / Estoque</a> |
-                        <a href="<%= request.getContextPath() %>/admin/ExcluirProduto?id=<%= p.getId() %>" onclick="return confirm('Deseja realmente excluir este produto?');">Excluir</a>
+                        <a href="<%= contexto %>/admin/ListarProdutoForm?id=<%= p.getId() %>">Alterar</a> |
+                        <a href="<%= contexto %>/admin/ExcluirProduto?id=<%= p.getId() %>" onclick="return confirm('Deseja realmente excluir este produto?');">Excluir</a>
                     </td>
                 </tr>
             <%     }
                } else { %>
                 <tr>
-                    <td colspan="7" style="text-align: center;">Nenhum produto cadastrado.</td>
+                    <td colspan="6" style="text-align: center;">Nenhum produto cadastrado.</td>
                 </tr>
             <% } %>
         </tbody>
     </table>
 </div>
 
-<jsp:include page="../rodape.jsp" />
+<%@include file="../rodape.jsp" %>

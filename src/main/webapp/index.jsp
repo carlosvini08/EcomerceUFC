@@ -10,7 +10,10 @@
 <%@include file="cabecalho.jsp" %>
 <%
     // página pública: lista apenas os produtos com estoque maior que zero
-    List<Produto> produtos = new ProdutoDAO().listarEmEstoque();
+    List<Produto> produtos = (List<Produto>) request.getAttribute("produtos");
+if (produtos == null) {
+    produtos = new ProdutoDAO().listarEmEstoque();
+}
     List<Categoria> categorias = new CategoriaDAO().listar();
     Map<Integer, Boolean> categoriaComProduto = new HashMap<>();
     for (Produto p : produtos) {

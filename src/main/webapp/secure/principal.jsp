@@ -22,10 +22,10 @@
 
     <% if (usuario.getAdministrador()) { %>
     <h2 style="margin-top: 35px;">Gabinete do Xerife</h2>
-    <p class="dica">Disponível nas próximas entregas:</p>
+    <p class="dica">Gerenciamento do armazém e próximas entregas:</p>
     <div class="acoes">
-        <span class="nav-btn em-breve">Categorias</span>
-        <span class="nav-btn em-breve">Produtos</span>
+        <a class="nav-btn" href="<%= contexto %>/admin/ListarCategorias">Categorias</a>
+        <a class="nav-btn" href="<%= contexto %>/admin/ListarProdutos">Produtos</a>
         <span class="nav-btn em-breve">Compras</span>
         <span class="nav-btn em-breve">Relatórios</span>
     </div>

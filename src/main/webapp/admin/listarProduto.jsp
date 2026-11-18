@@ -10,7 +10,7 @@
 
     <% String msgAdmin = (String) request.getAttribute("mensagem");
        if (msgAdmin != null) { %>
-        <p class="dica" style="font-weight: bold; color: #3e2723;"><%= msgAdmin %></p>
+        <p class="dica" style="font-weight: bold; color: #010101;"><%= msgAdmin %></p>
     <% } %>
 
     <div class="acoes" style="margin-bottom: 25px;">
@@ -37,7 +37,7 @@
                     <td><%= p.getId() %></td>
                     <td style="text-align: center;">
                         <% if (p.getFoto() != null && !p.getFoto().isEmpty()) { %>
-                            <img src="<%= contexto %>/MostrarFotoProduto?foto=<%= p.getFoto() %>" alt="Foto" style="max-height: 45px;" />
+                            <img src="<%= request.getContextPath() %>/MostrarFotoProduto?foto=<%= p.getFoto() %>" alt="Foto" style="max-height: 45px;" />
                         <% } else { %>
                             -
                         <% } %>

@@ -23,8 +23,6 @@ import modelo.produto.ProdutoDAO;
 )
 public class SalvarProdutoServlet extends HttpServlet {
 
-    private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "uploads_ecommerce";
-
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,7 +42,6 @@ public class SalvarProdutoServlet extends HttpServlet {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         String nomeFoto = null;
 
-        // Se for edição, recupera a foto atual caso não tenha marcado para remover
         if (idParam != null && !idParam.trim().isEmpty() && !idParam.equals("0")) {
             Produto existente = produtoDAO.obter(Integer.parseInt(idParam));
             if (existente != null && !"true".equals(removerFoto)) {
@@ -52,15 +49,16 @@ public class SalvarProdutoServlet extends HttpServlet {
             }
         }
 
-        // Processa upload de nova foto se enviada pelo formulário
         Part fotoPart = request.getPart("foto");
         if (fotoPart != null && fotoPart.getSize() > 0 && fotoPart.getSubmittedFileName() != null && !fotoPart.getSubmittedFileName().isEmpty()) {
-            File pastaUpload = new File(UPLOAD_DIR);
-            if (!pastaUpload.exists()) {
-                pastaUpload.mkdirs();
+            // Guarda na pasta segura uploads_ecommerce no diretório do utilizador
+            String pastaUploads = System.getProperty("user.home") + File.separator + "uploads_ecommerce";
+            File pasta = new File(pastaUploads);
+            if (!pasta.exists()) {
+                pasta.mkdirs();
             }
             nomeFoto = System.currentTimeMillis() + "_" + new File(fotoPart.getSubmittedFileName()).getName();
-            File arquivoDestino = new File(pastaUpload, nomeFoto);
+            File arquivoDestino = new File(pasta, nomeFoto);
             try (InputStream input = fotoPart.getInputStream()) {
                 Files.copy(input, arquivoDestino.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }

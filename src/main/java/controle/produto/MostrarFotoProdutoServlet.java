@@ -12,30 +12,37 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/MostrarFotoProduto")
 public class MostrarFotoProdutoServlet extends HttpServlet {
 
-    private static final String UPLOAD_DIR = System.getProperty("user.home") + File.separator + "uploads_ecommerce";
-
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nomeFoto = request.getParameter("foto");
-        if (nomeFoto == null || nomeFoto.trim().isEmpty()) {
+        String foto = request.getParameter("foto");
+        if (foto == null || foto.trim().isEmpty()) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        File arquivoFoto = new File(UPLOAD_DIR, nomeFoto);
-        if (!arquivoFoto.exists()) {
+        // Procura na pasta persistente de uploads no computador
+        String pastaUploads = System.getProperty("user.home") + File.separator + "uploads_ecommerce";
+        File arquivo = new File(pastaUploads, foto);
+
+        if (!arquivo.exists()) {
+            // Fallback caso a foto esteja na pasta antiga do webapp
+            String pastaWeb = getServletContext().getRealPath("/imagens");
+            if (pastaWeb != null) {
+                arquivo = new File(pastaWeb, foto);
+            }
+        }
+
+        if (arquivo.exists()) {
+            String mimeType = getServletContext().getMimeType(arquivo.getName());
+            if (mimeType == null) {
+                mimeType = "application/octet-stream";
+            }
+            response.setContentType(mimeType);
+            response.setContentLengthLong(arquivo.length());
+            Files.copy(arquivo.toPath(), response.getOutputStream());
+        } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
         }
-
-        String contentType = getServletContext().getMimeType(arquivoFoto.getName());
-        if (contentType == null) {
-            contentType = "application/octet-stream";
-        }
-
-        response.setContentType(contentType);
-        response.setContentLengthLong(arquivoFoto.length());
-        Files.copy(arquivoFoto.toPath(), response.getOutputStream());
     }
 }

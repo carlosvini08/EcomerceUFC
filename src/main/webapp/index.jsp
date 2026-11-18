@@ -40,7 +40,7 @@ if (produtos == null) {
         <% if (p.getQuantidade() <= 5) { %><div class="badge">Esgotando!</div><% } %>
         <div class="product-img">
             <% if (p.getFoto() != null && !p.getFoto().isBlank()) { %>
-            <img src="<%= contexto %>/fotos/<%= Html.escapar(p.getFoto()) %>" alt="<%= Html.escapar(p.getDescricao()) %>">
+            <img src="<%= request.getContextPath() %>/MostrarFotoProduto?foto=<%= p.getFoto() %>" alt="<%= Html.escapar(p.getDescricao()) %>" style="max-height: 140px; max-width: 100%;">
             <% } else { %>
             [ Ilustração de <%= Html.escapar(p.getDescricao()) %> ]
             <% } %>
